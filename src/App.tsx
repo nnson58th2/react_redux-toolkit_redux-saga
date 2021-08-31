@@ -6,7 +6,7 @@ import cityApi from 'api/cityApi';
 
 function App() {
   useEffect(() => {
-    cityApi.getAllCities().then((res) => console.log(res));
+    cityApi.getAll().then((res) => console.log(res));
   });
 
   return (
