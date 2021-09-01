@@ -1,13 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, delay, put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { fetchCount } from './counterAPI';
+import { delay, put, takeLatest } from 'redux-saga/effects';
 import { incrementSaga, incrementSagaSuccess } from './counterSlice';
-
-function* test() {
-  yield fetchCount(2);
-  // and
-  yield call(fetchCount, 2);
-}
 
 function* handleIncrementSaga(action: PayloadAction<number>) {
   // Wait 1s
