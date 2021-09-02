@@ -1,12 +1,8 @@
 import { all } from 'redux-saga/effects';
 
 import counterSaga from 'features/counter/CounterSaga';
-
-function helloSaga() {
-  console.log('Hello Saga');
-}
+import authSaga from 'features/auth/authSaga';
 
 export default function* rootState() {
-  console.log('Root Saga');
-  yield all([helloSaga(), counterSaga()]);
+  yield all([authSaga(), counterSaga()]);
 }

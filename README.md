@@ -16,4 +16,27 @@ auth / authentication
 
 - login
 - sign up / register
-- forget password
+- forgot password
+
+CLICK LOGIN
+
+- Call API to login
+- Success -> redirect ADMIN
+- Failed -> Show ERROR
+
+authSaga
+LOOP
+
+- if logged in, watch LOGOUT
+- else watch LOGIN
+
+LOGIN
+
+- Call login API to get token + user info
+- set token to localStorage
+- redirect to admin page
+
+LOGOUT
+
+- clear token from localStorage
+- redirect to login page
