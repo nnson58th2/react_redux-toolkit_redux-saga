@@ -1,18 +1,24 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 
 import authReducer from 'features/auth/authSlice';
 import counterReducer from '../features/counter/counterSlice';
 import rootSaga from './rootSaga';
+import { history } from 'utils';
+
+const rootReducer = combineReducers({
+  router: connectRouter(history),
+  auth: authReducer,
+  counter: counterReducer,
+});
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    counter: counterReducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(sagaMiddleware, routerMiddleware(history)),
 });
 
 sagaMiddleware.run(rootSaga);
